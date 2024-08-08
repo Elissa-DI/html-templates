@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(30%);
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(30%);
+            }
+
+            to {
+                transform: translateX(100%);
+            }
+        }
+
+        @keyframes slideOutReverse {
+            from {
+                transform: translateX(30%);
+            }
+
+            to {
+                transform: translateX(150%);
+            }
+        }
+
+        .overlay {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9;
+            background: rgba(255, 255, 255, 0.8);
+            display: none;
+            visibility: hidden;
+            opacity: 0;
+            animation: slideOut 1s ease forwards;
+        }
+
+        .overlay.visible {
+            display: flex;
+            visibility: visible;
+            opacity: 1;
+            animation: slideIn 1s ease forwards;
+        }
+
+        .overlay.hidden {
+            animation: slideOut 1s ease forwards;
+            opacity: 0;
+            visibility: hidden;
+            display: none;
+        }
+
+
+
+
+
+        .overlay.hidden_reverse {
+            animation: slideOutReverse 1s ease forwards;
+        }
+
+
+
+
+
+
+        .bar-section {
+            display: flex;
+            width: 70%;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .bar-image {
+            width: 30%;
+            height: 100%;
+            background-color: #ccc8ba;
+            padding: 30px;
+        }
+
+        .bar-image img {
+            width: 100%;
+            height: 30vh;
+            object-fit: cover;
+        }
+
+        .bar-image p {
+            margin-top: 20px;
+            color: black;
+        }
+
+        .divider-right {
+            border: 1px solid black;
+            height: 100vh;
+        }
+
+        .bar-links {
+            display: flex;
+            width: 70%;
+            flex-direction: column;
+            background-color: white;
+            justify-content: left;
+            align-items: left;
+            padding: 20px;
+        }
+
+        .ul-parent {
+            width: 100%;
+            padding-top: 30px;
+            position: relative;
+        }
+
+        .arrow-right {
+            display: inline-block;
+            margin-left: 80px;
+            color: black;
+            font-size: 50px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .divider-below {
+            border-top: 1px solid black;
+            width: 65%;
+        }
+
+        .rachel-logo img {
+            width: 100%;
+        }
+
+        .bar-right-corner {
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .mob-bar-contact {
+            display: none;
+        }
+
+        .ul-parent ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 18px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .bar-links img {
+            width: 70px;
+            height: auto;
+        }
+
+        .ul-parent ul li {
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .ul-parent ul li a {
+            text-decoration: none;
+            color: black;
+            display: inline-block;
+        }
+
+        .ul-parent ul li a:hover {
+            color: #ccc8ba;
+        }
+
+        .social-medias {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .contact-us {
+            font-size: 20px;
+            margin-top: 5px;
+        }
+
+        .more {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            text-align: center;
+            width: 70%;
+            margin: auto;
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .bar-image {
+                display: none;
+            }
+
+            .bar-links {
+                flex-direction: column;
+                width: 100%;
+                height: 100%;
+                padding: 10px;
+            }
+
+            .ul-parent ul {
+                font-size: 16px;
+            }
+
+            .divider-right {
+                display: none;
+            }
+
+            .mob-bar-contact {
+                display: flex;
+                border-top: 1px solid black;
+                text-align: center;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .mob-logo img {
+                margin-top: 10%;
+                width: 30%;
+            }
+
+            .mob-contact-us {
+                display: block;
+                margin-top: 20px;
+            }
+
+            .media-parent {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .bar-section {
+                width: 75%;
+                margin: auto;
+            }
+        }
+
+        .hide-elements {
+            z-index: 0;
+        }
+
+        .show-elements {
+            z-index: 9;
+        }
+
+        .display-none {
+            display: none;
+        }
+
+        .display-block {
+            display: block;
+        }
+
+        .header-burger-btn {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .header-burger-btn div {
+            background: black;
+            height: 2px;
+            width: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .header-burger-btn-links {
+            position: fixed;
+            top: 5%;
+            left: 63%;
+            border: none;
+            z-index: 10;
+            background-color: transparent;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .header-burger-btn-links div {
+            background: black;
+            height: 2px;
+            width: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .header-burger-btn-links .t_btn1 {
+            transform: rotate(45deg);
+            transform-origin: 25px 4px 0 18px;
+        }
+
+        .header-burger-btn-links .t_btn3 {
+            transform: rotate(-45deg);
+            transform-origin: 6px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="header-burger-btn">
+        <div class="t_btn1"></div>
+        <div class="t_btn3"></div>
+    </button>
+    <section id="overlay-section" class="overlay hidden">
+        <div class="bar-image">
+            <img src="https://images.squarespace-cdn.com/content/66b0dac9a402742a66ecb3a5/a245ac9c-b838-4b24-8c48-357e268dc9ee/Screenshot+2024-08-05+222336.png?content-type=image%2Fpng"
+                alt="Bar Image">
+            <p>This paragraph is a great place to put a mission statement, a fun quote, or a bit about who you are and
+                what they purpose of the blog is for! Be creative and really grab attention here because your viewers
+                will see it often!</p>
+        </div>
+        <div class="bar-links">
+            <button class="header-burger-btn-links">
+                <div class="t_btn1"></div>
+                <div class="t_btn3"></div>
+            </button>
+            <div class="ul-parent">
+                <h1>Logo goes here
+                </h1>
+                <ul>
+                    <li><a href="home-1">NO.1 TAKE ME HOME</a><span class="arrow-right">→</span></li>
+                    <div class="divider-below"></div>
+                    <li><a href="blog">NO. 2 READ THE BLOG</a><span class="arrow-right">→</span></li>
+                    <div class="divider-below"></div>
+                    <li><a href="shop">NO.3 SHOP MY FAVES</a><span class="arrow-right">→</span></li>
+                    <div class="divider-below"></div>
+                    <li><a href="about">NO.4 GET TO KNOW ME</a><span class="arrow-right">→</span></li>
+                    <div class="divider-below"></div>
+                    <li><a href="contact">NO.5 LET'S CONNECT</a><span class="arrow-right">→</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const burgerBtn = document.querySelector('.header-burger-btn');
+            const burgerBtnLinks = document.querySelector('.header-burger-btn-links');
+            const overlay = document.getElementById('overlay-section');
+            const elementsToToggleZIndex = document.querySelectorAll('.gallery, .gallery-section-wrapper, section[data-section-id="669e7ec26da4233a650b41c7"], section[data-section-id="669e8304f61d9732f1e373be"], section[data-section-id="669e83fe74cc7c729092f9cf"], section[data-section-id="66c2ed6e4d7ae315e3e8ec36"]');
+        
+            function resetOverlayAnimations() {
+                overlay.classList.remove('hidden_reverse');
+                overlay.classList.remove('hidden');
+            }
+        
+            burgerBtn.addEventListener('click', function () {
+                resetOverlayAnimations();
+                if (overlay.classList.contains('visible')) {
+                    overlay.classList.remove('visible');
+                    overlay.classList.add('hidden');
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                    }, 1000);
+                    elementsToToggleZIndex.forEach(element => {
+                        element.classList.remove('hide-elements');
+                        element.classList.add('show-elements');
+                    });
+                    burgerBtn.classList.remove('display-none');
+                    burgerBtn.classList.add('display-block');
+                    burgerBtnLinks.classList.remove('show');
+                } else {
+                    overlay.style.display = 'flex';
+                    overlay.classList.remove('hidden');
+                    overlay.classList.add('visible');
+                    elementsToToggleZIndex.forEach(element => {
+                        element.classList.remove('show-elements');
+                        element.classList.add('hide-elements');
+                    });
+                    burgerBtn.classList.remove('display-block');
+                    burgerBtn.classList.add('display-none');
+                    burgerBtnLinks.classList.add('show');
+                }
+            });
+        
+            burgerBtnLinks.addEventListener('click', function () {
+                resetOverlayAnimations();
+                if (overlay.classList.contains('visible')) {
+                    overlay.classList.add('hidden_reverse');
+                    setTimeout(() => {
+                        overlay.classList.remove('visible');
+                        overlay.style.display = 'none';
+                    }, 1000);
+                }
+            });
+        });
+        </script>
+        
+</body>
+
+</html>

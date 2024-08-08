@@ -1,0 +1,431 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp2 {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-100%);
+            }
+        }
+
+        @keyframes slideDown2 {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(100%);
+            }
+        }
+
+        .overlay {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9;
+            background: rgba(255, 255, 255, 0);
+            display: none;
+            opacity: 0;
+        }
+
+        .overlay.visible {
+            display: flex;
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .overlay .bar-section {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .overlay .bar-image {
+            width: 50%;
+            height: 100vh;
+        }
+
+        .overlay .bar-image img {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        .overlay .divider-right {
+            border: 1px solid black;
+            height: 100vh;
+        }
+
+        .overlay .bar-links {
+            display: flex;
+            width: 50%;
+            background-color: white;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay .bar-links .ul-parent {
+            width: 100%;
+            padding-top: 30px;
+        }
+
+        .overlay .rachel-logo img {
+            width: 100%;
+        }
+
+        .overlay .bar-right-corner {
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .overlay .mob-bar-contact {
+            display: none;
+        }
+
+        .overlay .bar-links .ul-parent ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 18px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .overlay .bar-links .ul-parent ul li {
+            margin: 10px 0;
+        }
+
+        .overlay .bar-links .ul-parent ul li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .overlay .bar-links .ul-parent ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .overlay .social-medias {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .overlay .contact-us {
+            font-size: 20px;
+            margin-top: 5px;
+        }
+
+        .overlay .more {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            text-align: center;
+            width: 70%;
+            margin: auto;
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        /* Media queries for mobile styles */
+        @media (max-width: 768px) {
+            .overlay .bar-image {
+                display: none;
+            }
+
+            .overlay .bar-links {
+                flex-direction: column;
+                width: 100%;
+                height: 100%;
+                padding: 10px;
+            }
+
+            .overlay .bar-links .ul-parent ul {
+                font-size: 16px;
+            }
+
+            .overlay .divider-right {
+                display: none;
+            }
+
+            .overlay .mob-bar-contact {
+                display: flex;
+                border-top: 1px solid black;
+                text-align: center;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .overlay .mob-logo img {
+                margin-top: 10%;
+                width: 30%;
+            }
+
+            .overlay .mob-contact-us {
+                display: block;
+                margin-top: 20px;
+            }
+
+            .overlay .media-parent {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .overlay .bar-section {
+                width: 75%;
+                margin: auto;
+            }
+        }
+
+        .overlay.slide-up .bar-image {
+            animation: slideUp 1s ease forwards;
+        }
+
+        .overlay.slide-up .bar-links {
+            animation: slideDown 1s ease forwards;
+        }
+
+        .overlay.slide-down .bar-image {
+            animation: slideDown 1s ease forwards;
+        }
+
+        .overlay.slide-down .bar-links {
+            animation: slideUp 1s ease forwards;
+        }
+
+
+
+
+        .overlay.slide-up2 .bar-image {
+            animation: slideUp2 1s ease forwards;
+        }
+
+        .overlay.slide-up2 .bar-links {
+            animation: slideDown2 1s ease forwards;
+        }
+
+        .overlay.slide-down2 .bar-image {
+            animation: slideDown2 1s ease forwards;
+        }
+
+        .overlay.slide-down2 .bar-links {
+            animation: slideUp2 1s ease forwards;
+        }
+
+
+
+
+        .hide-elements {
+            z-index: 0;
+        }
+
+        .show-elements {
+            z-index: 9;
+        }
+
+        .display-none {
+            display: none;
+        }
+
+        .display-block {
+            display: block;
+        }
+
+        .header-burger-btn {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            z-index: 10;
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .header-burger-btn div {
+            background: black;
+            height: 2px;
+            width: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .header-burger-btn.active .t_btn1 {
+            transform: rotate(45deg);
+            transform-origin: 6px 4px;
+        }
+
+        .header-burger-btn.active .t_btn2 {
+            opacity: 0;
+        }
+
+        .header-burger-btn.active .t_btn3 {
+            transform: rotate(-45deg);
+            transform-origin: 9px 0;
+        }
+
+        .initial-image {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="header-burger-btn">
+        <div class="t_btn1"></div>
+        <div class="t_btn2"></div>
+        <div class="t_btn3"></div>
+    </button>
+    <img src="https://images.squarespace-cdn.com/content/669c1e9e17973563eec010fd/2e126961-f4ad-4b9a-b8f4-857904f2048e/Rachel_Usher_Design_Eastfield_08.jpg?content-type=image%2Fjpeg"
+        alt="Initial Image" class="initial-image">
+    <!-- Overlay Section -->
+    <section id="overlay-section" class="overlay ">
+        <div class="bar-section">
+            <div class="bar-image">
+                <img src="https://images.squarespace-cdn.com/content/669c1e9e17973563eec010fd/2e126961-f4ad-4b9a-b8f4-857904f2048e/Rachel_Usher_Design_Eastfield_08.jpg?content-type=image%2Fjpeg"
+                    alt="Bar Image">
+            </div>
+            <div class="bar-links">
+                <div class="ul-parent">
+                    <ul>
+                        <li><a href="about-us">About Us</a></li>
+                        <li><a href="projects">UK Projects</a></li>
+                        <li><a href="international">International Projects</a></li>
+                        <li><a href="in-progress">In Progress</a></li>
+                        <li><a href="services">Our Services</a></li>
+                        <li><a href="press">Press</a></li>
+                        <li><a href="get-in-touch">Get In Touch</a></li>
+                    </ul>
+                    <p class="social-medias">
+                        <span><i class="fa fa-instagram"></i></span>
+                        <span><i class="fa fa-facebook"></i></span>
+                        <span><i class="fa fa-pinterest"></i></span>
+                        <span><i class="fa fa-twitter"></i></span>
+                    </p>
+                    <p class="more">More</p>
+                    <div class="mob-bar-contact">
+                        <p class="mob-contact-us">Yorkshire: 01302 215 975</p>
+                        <p class="mob-contact-us">London: 02033 266 266</p>
+                        <p class="mob-contact-us">studio@rachelusher.uk</p>
+                    </div>
+                </div>
+                <div class="divider-right"></div>
+                <div class="bar-right-corner">
+                    <div class="desk-bar-contact">
+                        <p>Rachel Usher Interior Design is a multi-award-winning high-end interior design practice
+                            specializing in providing clients with outstanding luxury interiors across the UK and
+                            internationally.</p>
+                        <p class="contact-us">Yorkshire: 01302 215 975</p>
+                        <p class="contact-us">London: 02033 266 266</p>
+                        <p class="contact-us">studio@rachelusher.uk</p>
+                        <p class="rachel-logo">
+                            <img src="https://images.squarespace-cdn.com/content/669c1e9e17973563eec010fd/0de845d8-7d21-46e7-b364-6427b48e2da4/RachelUsher_Logo_black_rgb.png?content-type=image%2Fpng"
+                                alt="">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const burgerBtn = document.querySelector('.header-burger-btn');
+            const overlay = document.getElementById('overlay-section');
+            const elementsToToggleZIndex = document.querySelectorAll('.gallery, .gallery-section-wrapper, section[data-section-id="669e7ec26da4233a650b41c7"], section[data-section-id="669e8304f61d9732f1e373be"], section[data-section-id="669e83fe74cc7c729092cbdd"], section[data-section-id="669e85b5720a310f3eb3275f"], section[data-section-id="669e89c26807cc326b79b4d1"], section[data-section-id="669c1e9f17973563eec01118"], section[data-section-id="66a64aee3dd05339f63d416b"]');
+            const elementsToToggleDisplay = document.querySelectorAll('.header-nav, .header-title, .language-picker');
+
+            if (burgerBtn && overlay) {
+                burgerBtn.addEventListener('click', function () {
+                    if (overlay.classList.contains('visible')) {
+                        overlay.classList.remove('slide-up');
+                        overlay.classList.remove('slide-up2');
+                        overlay.classList.add('slide-down2');
+                        setTimeout(() => {
+                            overlay.style.opacity = "0";
+                            overlay.style.visibility = "hidden";
+                            overlay.classList.remove('visible');
+                            overlay.classList.remove('slide-down2');
+                            elementsToToggleZIndex.forEach(element => {
+                                element.classList.remove('hide-elements');
+                                element.classList.add('show-elements');
+                            });
+                            elementsToToggleDisplay.forEach(element => {
+                                element.classList.remove('display-none');
+                                element.classList.add('display-block');
+                            });
+                        }, 1000);
+                        setTimeout(() => {
+                            burgerBtn.classList.remove('active');
+                        }, 700)
+                    } else {
+                        overlay.style.opacity = "1";
+                        overlay.style.visibility = "visible";
+                        overlay.classList.add('visible');
+                        overlay.classList.remove('slide-down');
+                        overlay.classList.remove('slide-down2');
+                        overlay.classList.add('slide-up');
+                        elementsToToggleZIndex.forEach(element => {
+                            element.classList.remove('show-elements');
+                            element.classList.add('hide-elements');
+                        });
+                        elementsToToggleDisplay.forEach(element => {
+                            element.classList.remove('display-block');
+                            element.classList.add('display-none');
+                        });
+                        burgerBtn.classList.toggle('active');
+                    }
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>
